@@ -1,10 +1,7 @@
 package mangomessenger.http
 
 import mangomessenger.http.declarations.responseStream
-import mangomessenger.http.declarations.shouldWriteBody
-import java.lang.StringBuilder
 import java.net.HttpURLConnection
-import java.net.URI
 import java.net.URL
 import java.util.concurrent.CompletableFuture
 
@@ -24,11 +21,11 @@ class HttpClient(private val interceptors: List<HttpInterceptor>) {
         val connection: HttpURLConnection = createConnection(handledHttpRequest)
 
         try {
-            if (httpRequest.shouldWriteBody) {
-                connection.outputStream.writer().let {
-                    it.write(httpRequest.body.toString())
-                    it.flush()
-                    it.close()
+            val isNotGetMethod = httpRequest.method.compareTo(HttpMethods.GET, true) != 0
+            if (isNotGetMethod && httpRequest.body != null) {
+                connection.outputStream.run {
+                    httpRequest.body!!.writeToStream(this)
+                    close()
                 }
             }
 

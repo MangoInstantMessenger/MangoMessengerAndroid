@@ -6,7 +6,6 @@ import mangomessenger.core.apis.requests.LoginRequest
 import mangomessenger.core.jwt.JwtInterceptor
 import mangomessenger.http.HttpClient
 import mangomessenger.http.HttpInterceptor
-import mangomessenger.http.HttpRequest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

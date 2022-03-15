@@ -8,8 +8,6 @@ import com.google.android.material.textfield.TextInputEditText
 import mangomessenger.core.apis.SessionsApiImpl
 import mangomessenger.core.apis.requests.LoginRequest
 import mangomessenger.http.*
-import org.json.JSONObject
-import java.util.*
 
 class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
