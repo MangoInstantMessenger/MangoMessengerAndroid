@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MangoMessenger</string>
+    <string name="sign_in_title">Mango Messenger</string>
+    <string name="description">We are Different, We Make You Different.</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+</resources>
