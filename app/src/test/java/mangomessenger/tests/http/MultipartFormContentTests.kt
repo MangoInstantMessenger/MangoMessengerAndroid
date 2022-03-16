@@ -1,4 +1,4 @@
-package tests.http
+package mangomessenger.tests.http
 
 import mangomessenger.http.MultipartFormContent
 import mangomessenger.http.MultipartFormFile

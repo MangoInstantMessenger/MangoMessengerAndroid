@@ -1,4 +1,4 @@
-package tests.apis.sessions
+package mangomessenger.tests.apis.sessions
 
 import mangomessenger.core.apis.SessionsApi
 import mangomessenger.core.apis.SessionsApiImpl
@@ -9,7 +9,7 @@ import mangomessenger.http.HttpInterceptor
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import tests.apis.variables.Credentials
+import mangomessenger.tests.apis.variables.Credentials
 
 class DeleteAllSessionsTests {
     private var jwtToken: String = ""

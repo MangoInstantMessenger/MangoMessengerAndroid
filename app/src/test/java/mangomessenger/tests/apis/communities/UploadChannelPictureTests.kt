@@ -1,4 +1,4 @@
-package tests.apis.communities
+package mangomessenger.tests.apis.communities
 
 import mangomessenger.core.apis.CommunitiesApi
 import mangomessenger.core.apis.CommunitiesApiImpl
@@ -11,7 +11,7 @@ import mangomessenger.http.HttpInterceptor
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import tests.apis.variables.Credentials
+import mangomessenger.tests.apis.variables.Credentials
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList

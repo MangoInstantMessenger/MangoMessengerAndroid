@@ -1,4 +1,4 @@
-package tests.apis.sessions
+package mangomessenger.tests.apis.sessions
 
 import mangomessenger.core.apis.SessionsApi
 import mangomessenger.core.apis.SessionsApiImpl
@@ -7,7 +7,7 @@ import mangomessenger.http.HttpClient
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import tests.apis.variables.Credentials
+import mangomessenger.tests.apis.variables.Credentials
 
 class LoginTests {
     private lateinit var sessionsApi: SessionsApi
