@@ -8,6 +8,7 @@ import com.google.android.material.textfield.TextInputEditText
 import mangomessenger.core.apis.SessionsApiImpl
 import mangomessenger.core.apis.requests.LoginRequest
 import mangomessenger.http.*
+import mangomessenger.http.pipelines.HttpPipeline
 
 class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
         val emailInput: TextInputEditText = findViewById(R.id.textInputEmailAddress)
         val passwordInput: TextInputEditText = findViewById(R.id.textInputPassword)
         val loginRequest = LoginRequest(emailInput.text.toString(), passwordInput.text.toString())
-        val sessionsApi = SessionsApiImpl(HttpClient(emptyList()))
+        val sessionsApi = SessionsApiImpl(HttpPipeline())
         val requestAsync = sessionsApi.loginAsync(loginRequest)
         val response = requestAsync.get()
         val message = response.message ?: response.errorMessage ?: ""
