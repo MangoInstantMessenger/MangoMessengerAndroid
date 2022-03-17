@@ -5,22 +5,22 @@ import mangomessenger.core.apis.requests.CreateCommunityRequest
 import mangomessenger.core.apis.responses.CreateCommunityResponse
 import mangomessenger.core.apis.responses.GetChatsResponse
 import mangomessenger.core.apis.responses.UpdateChannelPictureResponse
-import mangomessenger.core.apis.utils.safetyHttpRequestAsync
 import mangomessenger.http.*
 import mangomessenger.http.declarations.applyJsonContent
 import mangomessenger.http.declarations.applyMultipartFormContent
+import mangomessenger.http.pipelines.HttpPipeline
 import java.io.File
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class CommunitiesApiImpl(private val httpClient: HttpClient) : CommunitiesApi {
+class CommunitiesApiImpl(private val httpPipeline: HttpPipeline) : CommunitiesApi {
     private val gson = Gson()
     private val domain = "https://back.mangomessenger.company"
 
     override fun getChatsAsync(): CompletableFuture<GetChatsResponse> {
         val url = "$domain/api/communities"
         val httpRequest = HttpRequest(HttpMethods.GET, url)
-        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
             return@thenApply gson.fromJson(String(it.data), GetChatsResponse::class.java)
         }
@@ -30,7 +30,7 @@ class CommunitiesApiImpl(private val httpClient: HttpClient) : CommunitiesApi {
         val url = "$domain/api/communities/channel"
         val content = JsonContent(gson.toJson(request))
         val httpRequest = HttpRequest(HttpMethods.POST, url).applyJsonContent(content)
-        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
             return@thenApply gson.fromJson(String(it.data), CreateCommunityResponse::class.java)
         }
@@ -39,7 +39,7 @@ class CommunitiesApiImpl(private val httpClient: HttpClient) : CommunitiesApi {
     override fun createChatWithUserAsync(userId: UUID): CompletableFuture<CreateCommunityResponse> {
         val url = "$domain/api/communities/chat/$userId"
         val httpRequest = HttpRequest(HttpMethods.POST, url, JsonContent())
-        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
             return@thenApply gson.fromJson(String(it.data), CreateCommunityResponse::class.java)
         }
@@ -50,7 +50,7 @@ class CommunitiesApiImpl(private val httpClient: HttpClient) : CommunitiesApi {
         val httpRequest = HttpRequest(HttpMethods.GET, url).apply {
             queryParameters["displayName"] = displayName
         }
-        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
             return@thenApply gson.fromJson(String(it.data), GetChatsResponse::class.java)
         }
@@ -70,7 +70,7 @@ class CommunitiesApiImpl(private val httpClient: HttpClient) : CommunitiesApi {
         }
         val url = "$domain/api/communities/picture/$chatId"
         val httpRequest = HttpRequest(HttpMethods.POST, url).applyMultipartFormContent(multipartForm)
-        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
             return@thenApply gson.fromJson(String(it.data), UpdateChannelPictureResponse::class.java)
         }

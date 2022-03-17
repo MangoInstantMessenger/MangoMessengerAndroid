@@ -1,11 +1,15 @@
 package mangomessenger.http
 
 import mangomessenger.http.declarations.responseStream
+import mangomessenger.http.pipelines.HttpInterceptor
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.CompletableFuture
 
-class HttpClient(private val interceptors: List<HttpInterceptor>) {
+class HttpClient : HttpInterceptor {
+    override fun intercept(httpRequest: HttpRequest): CompletableFuture<HttpResponse> {
+        return requestAsync(httpRequest)
+    }
 
     fun requestAsync(httpRequest: HttpRequest): CompletableFuture<HttpResponse> {
         return CompletableFuture.supplyAsync {
@@ -14,17 +18,13 @@ class HttpClient(private val interceptors: List<HttpInterceptor>) {
     }
 
     private fun request(httpRequest: HttpRequest): HttpResponse {
-        val handledHttpRequest = interceptors.fold(httpRequest) {
-                modifiedHttpRequest: HttpRequest,
-                interceptor: HttpInterceptor -> interceptor.intercept(modifiedHttpRequest)
-        }
-        val connection: HttpURLConnection = createConnection(handledHttpRequest)
+        val connection: HttpURLConnection = createConnection(httpRequest)
 
         try {
             val isNotGetMethod = httpRequest.method.compareTo(HttpMethods.GET, true) != 0
-            if (isNotGetMethod && httpRequest.body != null) {
+            if (isNotGetMethod) {
                 connection.outputStream.run {
-                    httpRequest.body!!.writeToStream(this)
+                    httpRequest.body.writeToStream(this)
                     close()
                 }
             }

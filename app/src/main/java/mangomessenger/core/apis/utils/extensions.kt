@@ -1,8 +1,6 @@
 package mangomessenger.core.apis.utils
 
 import com.google.gson.Gson
-import mangomessenger.http.HttpClient
-import mangomessenger.http.HttpRequest
 import mangomessenger.http.HttpResponse
 import java.net.HttpURLConnection
 import java.util.concurrent.CompletableFuture
@@ -16,9 +14,4 @@ fun CompletableFuture<HttpResponse>.orUnauthenticated(): CompletableFuture<HttpR
 
         return@thenApply it
     }
-}
-
-// TODO("Remove it when WebAPI unauthenticated response fixed.")
-fun HttpClient.safetyHttpRequestAsync(httpRequest: HttpRequest): CompletableFuture<HttpResponse> {
-    return this.requestAsync(httpRequest).orUnauthenticated()
 }
