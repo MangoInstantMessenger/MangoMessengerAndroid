@@ -7,6 +7,7 @@ import mangomessenger.core.apis.responses.GetChatsResponse
 import mangomessenger.core.apis.responses.UpdateChannelPictureResponse
 import mangomessenger.core.apis.utils.safetyHttpRequestAsync
 import mangomessenger.http.*
+import mangomessenger.http.declarations.applyJsonContent
 import mangomessenger.http.declarations.applyMultipartFormContent
 import java.io.File
 import java.util.*
@@ -17,19 +18,42 @@ class CommunitiesApiImpl(private val httpClient: HttpClient) : CommunitiesApi {
     private val domain = "https://back.mangomessenger.company"
 
     override fun getChatsAsync(): CompletableFuture<GetChatsResponse> {
-        TODO("Not yet implemented")
+        val url = "$domain/api/communities"
+        val httpRequest = HttpRequest(HttpMethods.GET, url)
+        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        return response.thenApply {
+            return@thenApply gson.fromJson(String(it.data), GetChatsResponse::class.java)
+        }
     }
 
     override fun createChannelAsync(request: CreateCommunityRequest): CompletableFuture<CreateCommunityResponse> {
-        TODO("Not yet implemented")
+        val url = "$domain/api/communities/channel"
+        val content = JsonContent(gson.toJson(request))
+        val httpRequest = HttpRequest(HttpMethods.POST, url).applyJsonContent(content)
+        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        return response.thenApply {
+            return@thenApply gson.fromJson(String(it.data), CreateCommunityResponse::class.java)
+        }
     }
 
     override fun createChatWithUserAsync(userId: UUID): CompletableFuture<CreateCommunityResponse> {
-        TODO("Not yet implemented")
+        val url = "$domain/api/communities/chat/$userId"
+        val httpRequest = HttpRequest(HttpMethods.POST, url, JsonContent())
+        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        return response.thenApply {
+            return@thenApply gson.fromJson(String(it.data), CreateCommunityResponse::class.java)
+        }
     }
 
     override fun searchChatsAsync(displayName: String): CompletableFuture<GetChatsResponse> {
-        TODO("Not yet implemented")
+        val url = "$domain/api/communities/searches"
+        val httpRequest = HttpRequest(HttpMethods.GET, url).apply {
+            queryParameters["displayName"] = displayName
+        }
+        val response = httpClient.safetyHttpRequestAsync(httpRequest)
+        return response.thenApply {
+            return@thenApply gson.fromJson(String(it.data), GetChatsResponse::class.java)
+        }
     }
 
     override fun uploadChannelPictureAsync(

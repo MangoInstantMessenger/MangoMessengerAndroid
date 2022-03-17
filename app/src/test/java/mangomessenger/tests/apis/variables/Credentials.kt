@@ -1,4 +1,4 @@
-package tests.apis.variables
+package mangomessenger.tests.apis.variables
 
 sealed class Credentials private constructor() {
     companion object {
