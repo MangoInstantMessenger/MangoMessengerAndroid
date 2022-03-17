@@ -44,7 +44,7 @@ class HttpClient(private val interceptors: List<HttpInterceptor>) {
                 return@let String()
             }
 
-            return@let queryParams.map { "${it.key}=${it.value}" }.joinToString("&")
+            return@let '?' + queryParams.map { "${it.key}=${it.value}" }.joinToString("&")
         }
         val connection = URL(url).openConnection() as HttpURLConnection
         return connection.apply {
