@@ -1,28 +1,27 @@
-package mangomessenger.core.jwt
+package mangomessenger.bisunesslogic.interceptors
 
+import mangomessenger.bisunesslogic.data.TokensRepository
 import mangomessenger.core.apis.SessionsApiImpl
-import mangomessenger.core.types.models.Tokens
-import mangomessenger.http.HttpClient
 import mangomessenger.http.HttpRequest
 import mangomessenger.http.HttpResponse
 import mangomessenger.http.pipelines.HttpInterceptorMiddleware
-import mangomessenger.http.pipelines.HttpPipeline
+import mangomessenger.http.pipelines.HttpPipelineFactoryDefault
 import java.net.HttpURLConnection
-import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class AuthInterceptor(
-    private val tokensGetter: () -> Tokens?,
-    private val tokensSetter: (Tokens?) -> Unit)
-    : HttpInterceptorMiddleware() {
+class AuthInterceptor(private val tokensRepository: TokensRepository) : HttpInterceptorMiddleware() {
     override fun intercept(httpRequest: HttpRequest): CompletableFuture<HttpResponse> {
         return interceptNext(httpRequest).thenCompose { httpResponse ->
             if (httpResponse.connection.responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                val token = tokensGetter()?.refreshToken?.toString().orEmpty()
-                val interceptAgain = SessionsApiImpl(HttpPipeline())
-                    .refreshSessionAsync(token)
+                val tokens = tokensRepository.getTokens()
+                val httpPipelineFactory = HttpPipelineFactoryDefault()
+                val interceptAgain = SessionsApiImpl(httpPipelineFactory.createHttpPipeline())
+                    .refreshSessionAsync(tokens.refreshToken)
                     .thenCompose {
-                        tokensSetter(it.tokens)
+                        if (it.tokens != null) {
+                            tokensRepository.updateTokens(it.tokens)
+                        }
+
                         interceptNext(httpRequest)
                     }
 

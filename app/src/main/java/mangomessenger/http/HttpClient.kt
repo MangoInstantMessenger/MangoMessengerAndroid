@@ -1,16 +1,11 @@
 package mangomessenger.http
 
 import mangomessenger.http.declarations.responseStream
-import mangomessenger.http.pipelines.HttpInterceptor
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.CompletableFuture
 
-class HttpClient : HttpInterceptor {
-    override fun intercept(httpRequest: HttpRequest): CompletableFuture<HttpResponse> {
-        return requestAsync(httpRequest)
-    }
-
+class HttpClient {
     fun requestAsync(httpRequest: HttpRequest): CompletableFuture<HttpResponse> {
         return CompletableFuture.supplyAsync {
             return@supplyAsync request(httpRequest)
