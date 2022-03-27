@@ -4,7 +4,7 @@ import mangomessenger.core.apis.factories.MangoApisFactory
 import mangomessenger.core.apis.requests.LoginRequest
 import mangomessenger.http.pipelines.HttpPipelineFactoryDefault
 import mangomessenger.tests.apis.asserts.MangoAsserts
-import mangomessenger.tests.infrastructure.Constants
+import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
 import mangomessenger.tests.infrastructure.MangoApisFactoryImpl
 import org.junit.Test
 
@@ -18,7 +18,7 @@ class LoginTests {
     @Test
     fun loginSuccess() {
         val sessionsApi = mangoApisFactory.createSessionsApi()
-        val loginRequest = LoginRequest(Constants.testEmail(), Constants.testPassword())
+        val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
         val response = sessionsApi.loginAsync(loginRequest).get()
         MangoAsserts.assertSuccessResponse(response)
     }

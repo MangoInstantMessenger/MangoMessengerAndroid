@@ -5,10 +5,10 @@ import mangomessenger.bisunesslogic.data.TokenStorageImpl
 import mangomessenger.core.apis.SessionsApi
 import mangomessenger.core.apis.requests.LoginRequest
 import mangomessenger.tests.apis.asserts.MangoAsserts
-import mangomessenger.tests.infrastructure.Constants
+import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
 import mangomessenger.tests.infrastructure.HttpPipelineFactoryImpl
 import mangomessenger.tests.infrastructure.MangoApisFactoryImpl
-import mangomessenger.tests.infrastructure.SignInService
+import mangomessenger.bisunesslogic.services.SignInServiceImpl
 import org.junit.Before
 import org.junit.Test
 
@@ -24,8 +24,8 @@ class DeleteAllSessionsTests {
 
     @Test
     fun deleteAllSessionsSuccess() {
-        val signInService = SignInService(sessionsApi, tokenStorage)
-        val loginRequest = LoginRequest(Constants.testEmail(), Constants.testPassword())
+        val signInService = SignInServiceImpl(sessionsApi, tokenStorage)
+        val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
         val responseTask = signInService.signIn(loginRequest).thenCompose {
             return@thenCompose sessionsApi.deleteAllSessionsAsync()
         }

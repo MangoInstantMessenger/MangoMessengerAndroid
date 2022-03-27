@@ -1,4 +1,4 @@
-package mangomessenger.tests.infrastructure
+package mangomessenger.utils
 
 import java.util.*
 

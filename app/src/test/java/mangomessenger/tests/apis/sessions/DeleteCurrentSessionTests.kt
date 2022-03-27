@@ -2,10 +2,13 @@ package mangomessenger.tests.apis.sessions
 
 import mangomessenger.bisunesslogic.data.TokenStorage
 import mangomessenger.bisunesslogic.data.TokenStorageImpl
+import mangomessenger.bisunesslogic.services.SignInServiceImpl
 import mangomessenger.core.apis.SessionsApi
 import mangomessenger.core.apis.requests.LoginRequest
 import mangomessenger.tests.apis.asserts.MangoAsserts
 import mangomessenger.tests.infrastructure.*
+import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
+import mangomessenger.utils.UuidUtils
 import org.junit.Before
 import org.junit.Test
 
@@ -21,8 +24,8 @@ class DeleteCurrentSessionTests {
 
     @Test
     fun deleteCurrentSessionsSuccess() {
-        val signInService = SignInService(sessionsApi, tokenStorage)
-        val loginRequest = LoginRequest(Constants.testEmail(), Constants.testPassword())
+        val signInService = SignInServiceImpl(sessionsApi, tokenStorage)
+        val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
         val responseTask = signInService.signIn(loginRequest).thenCompose {
             val refreshToken = tokenStorage.getTokens().refreshToken
             return@thenCompose sessionsApi.deleteCurrentSessionAsync(refreshToken)

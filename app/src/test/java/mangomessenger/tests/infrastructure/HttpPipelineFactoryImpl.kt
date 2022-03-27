@@ -10,6 +10,7 @@ import mangomessenger.http.pipelines.HttpHandler
 import mangomessenger.http.pipelines.HttpPipeline
 import mangomessenger.http.pipelines.HttpPipelineFactory
 import mangomessenger.http.pipelines.HttpPipelineFactoryDefault
+import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
 
 class HttpPipelineFactoryImpl(private val tokenStorage: TokenStorage) : HttpPipelineFactory {
     override fun createHttpPipeline(): HttpPipeline {
@@ -17,7 +18,7 @@ class HttpPipelineFactoryImpl(private val tokenStorage: TokenStorage) : HttpPipe
         val httpHandler = HttpHandler(httpClient)
         val httpPipeline = HttpPipeline(httpHandler)
         val defaultPipeline = HttpPipelineFactoryDefault().createHttpPipeline()
-        val sessionsApi = SessionsApiImpl(Constants.mangoDomain(), defaultPipeline)
+        val sessionsApi = SessionsApiImpl(EnvironmentVariables.mangoDomain(), defaultPipeline)
         httpPipeline.addInterceptor(AuthInterceptor(tokenStorage, sessionsApi))
         httpPipeline.addInterceptor(JwtInterceptor(tokenStorage))
         httpPipeline.addInterceptor(SafetyUnauthenticatedInterceptor())

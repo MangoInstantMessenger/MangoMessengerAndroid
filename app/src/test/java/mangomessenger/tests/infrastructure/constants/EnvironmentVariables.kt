@@ -1,6 +1,6 @@
-package mangomessenger.tests.infrastructure
+package mangomessenger.tests.infrastructure.constants
 
-sealed class Constants {
+sealed class EnvironmentVariables {
     companion object {
         fun testEmail() = System.getenv("TESTS_MANGO_EMAIL").orEmpty()
 
