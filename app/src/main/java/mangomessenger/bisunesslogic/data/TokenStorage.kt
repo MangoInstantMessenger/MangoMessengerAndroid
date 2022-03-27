@@ -2,7 +2,7 @@ package mangomessenger.bisunesslogic.data
 
 import mangomessenger.core.types.models.Tokens
 
-interface TokensRepository {
+interface TokenStorage {
 
     fun getTokens(): Tokens
     

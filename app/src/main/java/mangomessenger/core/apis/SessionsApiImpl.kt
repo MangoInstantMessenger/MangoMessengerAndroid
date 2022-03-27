@@ -12,9 +12,12 @@ import mangomessenger.http.pipelines.HttpPipeline
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class SessionsApiImpl(private val httpPipeline: HttpPipeline) : SessionsApi {
+class SessionsApiImpl(
+    private val domain: String,
+    private val httpPipeline: HttpPipeline
+    ) : SessionsApi {
+
     private val gson = Gson()
-    private val domain = "https://back.mangomessenger.company"
 
     override fun loginAsync(request: LoginRequest): CompletableFuture<LoginResponse> {
         val url = "$domain/api/sessions"

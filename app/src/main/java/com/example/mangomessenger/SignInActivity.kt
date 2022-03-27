@@ -7,7 +7,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import mangomessenger.core.apis.SessionsApiImpl
 import mangomessenger.core.apis.requests.LoginRequest
-import mangomessenger.http.pipelines.HttpPipeline
 import mangomessenger.http.pipelines.HttpPipelineFactoryDefault
 
 class SignInActivity : AppCompatActivity() {
@@ -23,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
         val passwordInput: TextInputEditText = findViewById(R.id.textInputPassword)
         val loginRequest = LoginRequest(emailInput.text.toString(), passwordInput.text.toString())
         val httpPipelineFactory = HttpPipelineFactoryDefault()
-        val sessionsApi = SessionsApiImpl(httpPipelineFactory.createHttpPipeline())
+        val sessionsApi = SessionsApiImpl("", httpPipelineFactory.createHttpPipeline())
         val requestAsync = sessionsApi.loginAsync(loginRequest)
         val response = requestAsync.get()
         val message = response.message ?: response.errorMessage ?: ""

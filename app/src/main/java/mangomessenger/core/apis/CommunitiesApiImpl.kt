@@ -13,9 +13,12 @@ import java.io.File
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class CommunitiesApiImpl(private val httpPipeline: HttpPipeline) : CommunitiesApi {
+class CommunitiesApiImpl(
+    private val domain: String,
+    private val httpPipeline: HttpPipeline
+    ) : CommunitiesApi {
+
     private val gson = Gson()
-    private val domain = "https://back.mangomessenger.company"
 
     override fun getChatsAsync(): CompletableFuture<GetChatsResponse> {
         val url = "$domain/api/communities"
