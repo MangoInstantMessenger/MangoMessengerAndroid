@@ -7,5 +7,7 @@ sealed class EnvironmentVariables {
         fun testPassword() = System.getenv("TESTS_MANGO_PASSWORD").orEmpty()
 
         fun mangoDomain() = System.getenv("MANGO_DOMAIN").orEmpty()
+
+        fun testImageFilePath() = System.getenv("TESTS_MANGO_IMAGE").orEmpty()
     }
 }
