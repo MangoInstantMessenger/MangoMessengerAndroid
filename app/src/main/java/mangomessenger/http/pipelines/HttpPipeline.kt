@@ -1,12 +1,15 @@
 package mangomessenger.http.pipelines
 
-import mangomessenger.http.HttpClient
 import mangomessenger.http.HttpRequest
 import mangomessenger.http.HttpResponse
 import java.util.concurrent.CompletableFuture
 
-class HttpPipeline {
-    private var interceptorChain: HttpInterceptor = HttpClient()
+class HttpPipeline(httpHandler: HttpHandler) {
+    private var interceptorChain: HttpInterceptor
+
+    init {
+        interceptorChain = httpHandler
+    }
 
     fun addInterceptor(httpInterceptorMiddleware: HttpInterceptorMiddleware) {
         httpInterceptorMiddleware.linkWith(interceptorChain)
