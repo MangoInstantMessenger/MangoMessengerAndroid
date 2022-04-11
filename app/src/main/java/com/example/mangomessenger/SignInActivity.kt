@@ -1,31 +1,41 @@
 package com.example.mangomessenger
 
 import android.os.Bundle
-import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import mangomessenger.core.apis.SessionsApiImpl
-import mangomessenger.core.apis.requests.LoginRequest
-import mangomessenger.http.pipelines.HttpPipelineFactoryDefault
+import com.example.mangomessenger.viewmodels.SignInViewModel
+import com.example.mangomessenger.viewmodels.SignInViewModelFactory
+import com.google.android.material.button.MaterialButton
+import mangomessenger.bisunesslogic.data.TokenStorageImpl
+import mangomessenger.bisunesslogic.services.HttpPipelineFactoryImpl
+import mangomessenger.bisunesslogic.services.MangoApisFactoryImpl
+import mangomessenger.bisunesslogic.services.SignInServiceImpl
 
 class SignInActivity : AppCompatActivity() {
+    private lateinit var signInViewModel: SignInViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         supportActionBar?.hide()
-    }
 
-
-    fun login(view: View) {
-        val emailInput: TextInputEditText = findViewById(R.id.textInputEmailAddress)
-        val passwordInput: TextInputEditText = findViewById(R.id.textInputPassword)
-        val loginRequest = LoginRequest(emailInput.text.toString(), passwordInput.text.toString())
-        val httpPipelineFactory = HttpPipelineFactoryDefault()
-        val sessionsApi = SessionsApiImpl("", httpPipelineFactory.createHttpPipeline())
-        val requestAsync = sessionsApi.loginAsync(loginRequest)
-        val response = requestAsync.get()
-        val message = response.message ?: response.errorMessage ?: ""
-        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+        val tokenStorage = TokenStorageImpl()
+        val pipelineFactory = HttpPipelineFactoryImpl(tokenStorage)
+        val mangoApisFactory = MangoApisFactoryImpl(pipelineFactory)
+        val sessionsApi = mangoApisFactory.createSessionsApi()
+        val signInService = SignInServiceImpl(sessionsApi, tokenStorage)
+        val signInViewModelFactory = SignInViewModelFactory(signInService)
+        signInViewModel = signInViewModelFactory.create(SignInViewModel::class.java)
+        signInViewModel.loginResult.observe(this) { loginResult ->
+            val message = loginResult.message ?: loginResult.errorMessage
+            println(message)
+            // TODO: Redirect to MainActivity if response is success
+        }
+        val emailTextBox = findViewById<EditText>(R.id.textInputEmailAddress)
+        emailTextBox.addTextChangedListener(signInViewModel.emailTextWatcher)
+        val passwordTextBox = findViewById<EditText>(R.id.textInputPassword)
+        passwordTextBox.addTextChangedListener(signInViewModel.passwordTextWatcher)
+        val button = findViewById<MaterialButton>(R.id.MaterialButtonLogin)
+        button.setOnClickListener(signInViewModel::onSignInClicked)
     }
 }

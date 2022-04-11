@@ -100,7 +100,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
         android:text="@string/login"
-        app:backgroundTint="@color/orange"
-        android:onClick="login"/>
+        app:backgroundTint="@color/orange"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

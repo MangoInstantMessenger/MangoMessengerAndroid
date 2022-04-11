@@ -20,4 +20,9 @@ interface SignInService {
      * SignOut from all devices and clear sessions.
      */
     fun signOutAll() : CompletableFuture<BaseResponse>
+
+    /**
+     * Try signIn using existing session.
+     */
+    fun isSigned() : CompletableFuture<LoginResponse>
 }
