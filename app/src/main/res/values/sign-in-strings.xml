@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_title">Login</string>
+
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="restore_password">Restore Password</string>
+
+    <string name="create_new_account_prompt">Create account?</string>
+    <string name="forgot_password_prompt">Forgot Password?</string>
+
+    <string name="email">Email</string>
+    <string name="email_error_format">Email format is invalid.</string>
+
+    <string name="password">Password</string>
+    <string name="password_error_empty">Password is empty.</string>
+</resources>

@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#353535</color>
     <color name="orange">#FFA500</color>
+    <color name="danger">#f44336</color>
+    <color name="primary">#7C4DFF</color>
 </resources>

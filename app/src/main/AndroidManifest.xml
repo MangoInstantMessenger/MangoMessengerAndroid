@@ -13,26 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MangoMessenger">
         <activity
-            android:name=".ui.login.LoginTestActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login_test" />
-        <activity
-            android:name=".ui.login.tESTActivity"
-            android:exported="false"
-            android:label="@string/title_activity_testactivity" />
-        <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true" />
         <activity
             android:name=".ui.restore.RestoreActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.registry.RegistryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
+            android:exported="true"
+            android:label="@string/login_title" />
     </application>
 
 </manifest>
