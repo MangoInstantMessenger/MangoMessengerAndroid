@@ -13,8 +13,8 @@ import java.util.concurrent.CompletableFuture
 
 class LoginViewModel(private val signInService: SignInService) : ViewModel() {
     private val _loginForm = MutableLiveData(LoginFormState(
-        emailError = R.string.email_error_format,
-        passwordError = R.string.password_error_empty
+        emailError = R.string.emailErrorFormat,
+        passwordError = R.string.passwordErrorEmpty
     ))
     val loginFormState: LiveData<LoginFormState> get() = _loginForm
 
@@ -30,11 +30,7 @@ class LoginViewModel(private val signInService: SignInService) : ViewModel() {
         }
 
         override fun afterTextChanged(text: Editable?) {
-            if (_loginForm.value?.formWasTouched != true) {
-                _loginForm.value = _loginForm.value?.copy(formWasTouched = true)
-            }
-
-            _loginForm.value = _loginForm.value?.copy(dataIsValid = dataIsValid())
+            touchForm()
         }
     }
 
@@ -47,17 +43,21 @@ class LoginViewModel(private val signInService: SignInService) : ViewModel() {
         }
 
         override fun afterTextChanged(text: Editable?) {
-            if (_loginForm.value?.formWasTouched != true) {
-                _loginForm.value = _loginForm.value?.copy(formWasTouched = true)
-            }
-
-            _loginForm.value = _loginForm.value?.copy(dataIsValid = dataIsValid())
+            touchForm()
         }
+    }
+
+    private fun touchForm() {
+        if (_loginForm.value?.formWasTouched != true) {
+            _loginForm.value = _loginForm.value?.copy(formWasTouched = true)
+        }
+
+        _loginForm.value = _loginForm.value?.copy(dataIsValid = dataIsValid())
     }
 
     private fun validatePassword(password: String) {
         if (password.isEmpty()) {
-            _loginForm.value = _loginForm.value?.copy(passwordError = R.string.password_error_empty)
+            _loginForm.value = _loginForm.value?.copy(passwordError = R.string.passwordErrorEmpty)
         }
         else {
             _loginForm.value = _loginForm.value?.copy(passwordError = null)
@@ -66,7 +66,7 @@ class LoginViewModel(private val signInService: SignInService) : ViewModel() {
 
     private fun validateEmail(email: String) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _loginForm.value = _loginForm.value?.copy(emailError = R.string.email_error_format)
+            _loginForm.value = _loginForm.value?.copy(emailError = R.string.emailErrorFormat)
         }
         else {
             _loginForm.value = _loginForm.value?.copy(emailError = null)

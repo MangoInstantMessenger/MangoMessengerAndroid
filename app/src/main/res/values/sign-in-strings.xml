@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_title">Login</string>
+    <string name="loginTitle">Login</string>
 
-    <string name="sign_in">Sign In</string>
-    <string name="register">Register</string>
-    <string name="restore_password">Restore Password</string>
+    <string name="signIn">Sign In</string>
+    <string name="registry">Registry</string>
+    <string name="restorePassword">Restore Password</string>
 
-    <string name="create_new_account_prompt">Create account?</string>
-    <string name="forgot_password_prompt">Forgot Password?</string>
+    <string name="createNewAccountPrompt">Create account?</string>
+    <string name="forgotPasswordPrompt">Forgot Password?</string>
+    <string name="backToLoginPrompt">Back to Login</string>
 
     <string name="email">Email</string>
-    <string name="email_error_format">Email format is invalid.</string>
+    <string name="emailErrorFormat">Email format is invalid.</string>
 
     <string name="password">Password</string>
-    <string name="password_error_empty">Password is empty.</string>
+    <string name="passwordErrorEmpty">Password is empty.</string>
+    <string name="passwordErrorRequirements">Password (8 chars, digits, upper, lower, symbol)</string>
+
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="confirmPasswordError">Passwords not equal.</string>
+
+    <string name="displayName">Display Name</string>
+    <string name="displayNameErrorEmpty">Display Name is empty.</string>
 </resources>
