@@ -17,7 +17,6 @@ import org.junit.Test
 import java.util.concurrent.CompletableFuture
 import kotlin.math.sign
 
-// TODO: Requires bug-fixes for backend to work correct.
 class ChangePasswordTests {
     private lateinit var tokenStorage: TokenStorage
     private lateinit var usersApi: UsersApi

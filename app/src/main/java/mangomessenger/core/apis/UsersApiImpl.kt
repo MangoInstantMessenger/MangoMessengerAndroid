@@ -76,7 +76,7 @@ class UsersApiImpl(
         val url = "$domain/api/users/picture"
         val multipartForm = MultipartFormContent().apply {
             formFields.add(MultipartFormFile(
-                name = "newProfilePicture",
+                name = "pictureFile",
                 fileName = picture.name,
                 contentType = "image/${picture.extension}",
                 picture
