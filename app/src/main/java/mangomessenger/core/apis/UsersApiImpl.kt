@@ -34,7 +34,7 @@ class UsersApiImpl(
     }
 
     override fun changePassword(changePasswordRequest: ChangePasswordRequest): CompletableFuture<BaseResponse> {
-        val url = "$domain/api/password"
+        val url = "$domain/api/users/password"
         val content = JsonContent(gson.toJson(changePasswordRequest))
         val httpRequest = HttpRequest(HttpMethods.PUT, url).applyJsonContent(content)
         val response = httpPipeline.handleRequest(httpRequest)
