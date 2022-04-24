@@ -4,6 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.restore.RestoreActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp"
+        android:text="@string/restorePassword"
+        android:textSize="@dimen/title"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/restorePasswordDescription"
+        android:textSize="@dimen/common"
+        android:textAlignment="center"
+        android:paddingBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"/>
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:textSize="@dimen/common"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"/>
+
+    <TextView
+        android:id="@+id/emailPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/emailErrorFormat"
+        android:textSize="@dimen/small"
+        android:textColor="@color/danger"
+        android:padding="5dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailInput"/>
+
+    <Button
+        android:id="@+id/requestRestorePasswordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requestRestorePassword"
+        android:textSize="@dimen/small"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/orange"
+        android:enabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailPrompt"/>
+
+    <TextView
+        android:id="@+id/backToLoginPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/backToLoginPrompt"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/requestRestorePasswordButton" />
+
+    <TextView
+        android:id="@+id/createAccountPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createNewAccountPrompt"
+        android:textSize="@dimen/small"
+        android:textColor="@color/primary"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backToLoginPrompt"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
