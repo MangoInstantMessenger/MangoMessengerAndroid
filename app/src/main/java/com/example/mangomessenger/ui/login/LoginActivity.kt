@@ -47,22 +47,20 @@ class LoginActivity : AppCompatActivity() {
         addListeners()
 
         loginViewModel.loginFormState.observe(this) {
-            if (it.formWasTouched) {
-                if (it.emailError != null) {
-                    emailPrompt.text = getString(it.emailError)
-                    emailPrompt.visibility = View.VISIBLE
-                }
-                else {
-                    emailPrompt.visibility = View.GONE
-                }
+            if (it.emailError != null && it.emailTouched) {
+                emailPrompt.text = getString(it.emailError)
+                emailPrompt.visibility = View.VISIBLE
+            }
+            else {
+                emailPrompt.visibility = View.GONE
+            }
 
-                if (it.passwordError != null) {
-                    passwordPrompt.text = getString(it.passwordError)
-                    passwordPrompt.visibility = View.VISIBLE
-                }
-                else {
-                    passwordPrompt.visibility = View.GONE
-                }
+            if (it.passwordError != null && it.passwordTouched) {
+                passwordPrompt.text = getString(it.passwordError)
+                passwordPrompt.visibility = View.VISIBLE
+            }
+            else {
+                passwordPrompt.visibility = View.GONE
             }
 
             loginButton.isEnabled = it.dataIsValid

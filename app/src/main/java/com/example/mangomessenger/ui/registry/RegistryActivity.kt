@@ -43,7 +43,7 @@ class RegistryActivity : AppCompatActivity() {
         addListeners()
 
         registryViewModel.registryFormState.observe(this) {
-            if (it.displayNameError != null && it.displayNameWasTouched) {
+            if (it.displayNameError != null && it.displayNameTouched) {
                 displayNamePrompt.text = getString(it.displayNameError)
                 displayNamePrompt.visibility = View.VISIBLE
             }
@@ -51,7 +51,7 @@ class RegistryActivity : AppCompatActivity() {
                 displayNamePrompt.visibility = View.GONE
             }
 
-            if (it.emailError != null && it.emailWasTouched) {
+            if (it.emailError != null && it.emailTouched) {
                 emailPrompt.text = getString(it.emailError)
                 emailPrompt.visibility = View.VISIBLE
             }
@@ -59,7 +59,7 @@ class RegistryActivity : AppCompatActivity() {
                 emailPrompt.visibility = View.GONE
             }
 
-            if (it.passwordError != null && it.passwordWasTouched) {
+            if (it.passwordError != null && it.passwordTouched) {
                 passwordPrompt.text = getString(it.passwordError)
                 passwordPrompt.visibility = View.VISIBLE
             }
@@ -67,7 +67,7 @@ class RegistryActivity : AppCompatActivity() {
                 passwordPrompt.visibility = View.GONE
             }
 
-            if (it.confirmPasswordError != null && it.confirmPasswordWasTouched) {
+            if (it.confirmPasswordError != null && it.confirmPasswordTouched) {
                 confirmPasswordPrompt.text = getString(it.confirmPasswordError)
                 confirmPasswordPrompt.visibility = View.VISIBLE
             }

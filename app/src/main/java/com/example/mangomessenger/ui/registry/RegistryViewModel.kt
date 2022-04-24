@@ -33,9 +33,9 @@ class RegistryViewModel : ViewModel() {
         }
 
         override fun afterTextChanged(text: Editable?) {
-            if (_registryFormState.value?.displayNameWasTouched != true) {
+            if (_registryFormState.value?.displayNameTouched != true) {
                 _registryFormState.value = _registryFormState.value?.copy(
-                    displayNameWasTouched = true
+                    displayNameTouched = true
                 )
             }
 
@@ -53,9 +53,9 @@ class RegistryViewModel : ViewModel() {
         }
 
         override fun afterTextChanged(text: Editable?) {
-            if (_registryFormState.value?.emailWasTouched != true) {
+            if (_registryFormState.value?.emailTouched != true) {
                 _registryFormState.value = _registryFormState.value?.copy(
-                    emailWasTouched = true
+                    emailTouched = true
                 )
             }
 
@@ -76,9 +76,9 @@ class RegistryViewModel : ViewModel() {
         }
 
         override fun afterTextChanged(text: Editable?) {
-            if (_registryFormState.value?.passwordWasTouched != true) {
+            if (_registryFormState.value?.passwordTouched != true) {
                 _registryFormState.value = _registryFormState.value?.copy(
-                    passwordWasTouched = true
+                    passwordTouched = true
                 )
             }
 
@@ -99,9 +99,9 @@ class RegistryViewModel : ViewModel() {
         }
 
         override fun afterTextChanged(text: Editable?) {
-            if (_registryFormState.value?.confirmPasswordWasTouched != true) {
+            if (_registryFormState.value?.confirmPasswordTouched != true) {
                 _registryFormState.value = _registryFormState.value?.copy(
-                    confirmPasswordWasTouched = true
+                    confirmPasswordTouched = true
                 )
             }
 
