@@ -45,7 +45,12 @@ class UploadChannelPictureTests {
                 communitiesApi.uploadChannelPictureAsync(chatId, picture)
             }
         val response = responseTask.get()
-        println(response.statusCode)
+        println("message: ${response.message}")
+        println("errorMessage: ${response.errorMessage}")
+        println("statusCode: ${response.statusCode}")
+        println("updatedLogoUrl: ${response.updatedLogoUrl}")
+        println("errorDetails: ${response.errorDetails}")
+        println("success: ${response.success}")
         MangoAsserts.assertSuccessResponse(response)
     }
 }

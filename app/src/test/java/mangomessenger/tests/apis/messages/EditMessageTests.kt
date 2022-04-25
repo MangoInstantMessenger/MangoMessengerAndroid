@@ -40,7 +40,11 @@ class EditMessageTests {
                     messagesApi.editMessage(editMessageRequest)
                 }
         val response = responseTask.get()
-        println(response.statusCode)
+        println("message: ${response.message}")
+        println("errorMessage: ${response.errorMessage}")
+        println("statusCode: ${response.statusCode}")
+        println("errorDetails: ${response.errorDetails}")
+        println("success: ${response.success}")
         MangoAsserts.assertSuccessResponse(response)
     }
 
