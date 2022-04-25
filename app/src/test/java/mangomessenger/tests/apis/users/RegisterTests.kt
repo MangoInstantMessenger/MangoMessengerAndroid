@@ -24,7 +24,6 @@ class RegisterTests {
         usersApi = mangoApisFactory.createUsersApi()
     }
 
-    // TODO: Add some feature to remove created user from DB after test.
     @Test
     fun registerSuccess() {
         val randomEmail = UUID.randomUUID().toString() + "@gmail.com"
