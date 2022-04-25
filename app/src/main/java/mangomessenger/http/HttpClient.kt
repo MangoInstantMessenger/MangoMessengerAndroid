@@ -3,6 +3,7 @@ package mangomessenger.http
 import mangomessenger.http.declarations.responseStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLEncoder
 import java.util.concurrent.CompletableFuture
 
 class HttpClient {
@@ -39,7 +40,9 @@ class HttpClient {
                 return@let String()
             }
 
-            return@let '?' + queryParams.map { "${it.key}=${it.value}" }.joinToString("&")
+            return@let '?' + queryParams
+                .map { "${it.key}=${URLEncoder.encode(it.value, "utf-8")}" }
+                .joinToString("&")
         }
         val connection = URL(url).openConnection() as HttpURLConnection
         return connection.apply {

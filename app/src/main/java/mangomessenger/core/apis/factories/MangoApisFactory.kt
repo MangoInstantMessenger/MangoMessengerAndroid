@@ -2,7 +2,6 @@ package mangomessenger.core.apis.factories
 
 import mangomessenger.core.apis.CommunitiesApi
 import mangomessenger.core.apis.SessionsApi
-import mangomessenger.core.apis.UsersApi
 
 interface MangoApisFactory {
 
@@ -11,4 +10,6 @@ interface MangoApisFactory {
     fun createSessionsApi() : SessionsApi
 
     fun createUsersApi() : UsersApi
+
+    fun createMessagesApi() : MessagesApi
 }
