@@ -25,6 +25,7 @@ class SessionsApiImpl(
         val httpRequest = HttpRequest(HttpMethods.POST, url).applyJsonContent(content)
         val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
+            println("loginAsync response: ${String(it.data)}")
             return@thenApply gson.fromJson(String(it.data), LoginResponse::class.java)
         }
     }
