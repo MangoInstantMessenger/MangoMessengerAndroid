@@ -36,7 +36,6 @@ class DeleteMessageTests {
     fun deleteMessageSuccess() {
         val chatId = UUID.fromString("13d0ee43-460c-49ef-80d3-402103ec3445")
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
-        println(loginRequest)
         val responseTask = signInService
             .signIn(loginRequest)
             .thenCompose { createMessageToDelete(chatId) }

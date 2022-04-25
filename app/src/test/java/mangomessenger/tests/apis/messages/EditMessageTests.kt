@@ -33,6 +33,7 @@ class EditMessageTests {
             "Hello, World [UnitTestMessageEdited]",
             chatId)
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
+        println("loginRequest: $loginRequest")
         val responseTask = signInService
                 .signIn(loginRequest)
                 .thenCompose {
@@ -62,6 +63,7 @@ class EditMessageTests {
             "Hello, World [UnitTestMessageEdited]",
             chatId)
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
+        println("loginRequest: $loginRequest")
         val responseTask =  signInService
                 .signIn(loginRequest)
                 .thenCompose {
