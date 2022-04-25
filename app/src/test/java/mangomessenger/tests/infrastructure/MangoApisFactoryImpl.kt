@@ -1,9 +1,6 @@
 package mangomessenger.tests.infrastructure
 
-import mangomessenger.core.apis.CommunitiesApi
-import mangomessenger.core.apis.CommunitiesApiImpl
-import mangomessenger.core.apis.SessionsApi
-import mangomessenger.core.apis.SessionsApiImpl
+import mangomessenger.core.apis.*
 import mangomessenger.core.apis.factories.MangoApisFactory
 import mangomessenger.http.pipelines.HttpPipelineFactory
 
