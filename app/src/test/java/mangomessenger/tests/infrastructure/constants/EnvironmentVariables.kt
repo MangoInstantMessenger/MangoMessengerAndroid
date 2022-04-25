@@ -11,7 +11,5 @@ sealed class EnvironmentVariables {
         fun testImageFilePath() = System.getenv("TESTS_MANGO_IMAGE").orEmpty()
 
         fun testNewPassword() = System.getenv("TEST_MANGO_NEW_PASSWORD").orEmpty()
-
-        fun registerEmail() = System.getenv("TEST_MANGO_REGISTER_EMAIL").orEmpty()
     }
 }

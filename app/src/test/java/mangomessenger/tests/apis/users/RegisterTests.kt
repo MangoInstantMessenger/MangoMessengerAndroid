@@ -10,6 +10,7 @@ import mangomessenger.tests.infrastructure.MangoApisFactoryImpl
 import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 
 class RegisterTests {
     private lateinit var tokenStorage: TokenStorage
@@ -26,9 +27,10 @@ class RegisterTests {
     // TODO: Add some feature to remove created user from DB after test.
     @Test
     fun registerSuccess() {
+        val randomEmail = UUID.randomUUID().toString() + "@gmail.com"
         val registerRequest = RegisterRequest(
             displayName = "TestUser",
-            email = EnvironmentVariables.registerEmail(),
+            email = randomEmail,
             password = "MyStrong!Passw0rd",
             termsAccepted = true
         )
