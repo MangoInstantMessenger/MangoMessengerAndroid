@@ -31,6 +31,7 @@ class SessionsApiImpl(
 
     override fun refreshSessionAsync(refreshToken: UUID): CompletableFuture<LoginResponse> {
         val url = "$domain/api/sessions/$refreshToken"
+        println("[refreshSession] currentDomain: $domain")
         val httpRequest = HttpRequest(HttpMethods.POST, url)
         val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
