@@ -81,6 +81,7 @@ class CommunitiesApiImpl(
         val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
             println("uploadResponseCode: ${it.connection.responseCode}")
+            println("data: ${String(it.data)}")
             return@thenApply gson.fromJson(String(it.data), UpdateChannelPictureResponse::class.java)
         }
     }
