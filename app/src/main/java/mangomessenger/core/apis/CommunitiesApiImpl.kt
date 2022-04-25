@@ -63,6 +63,11 @@ class CommunitiesApiImpl(
         chatId: UUID,
         picture: File
     ): CompletableFuture<UpdateChannelPictureResponse> {
+        println("picturePath: ${picture.absolutePath}")
+        println("length: ${picture.length()}")
+        println("extensions: ${picture.extension}")
+        println("isFile: ${picture.isFile}")
+        println("name: ${picture.name}")
         val multipartForm = MultipartFormContent().apply {
             formFields.add(MultipartFormFile(
                 name = "newGroupPicture",
