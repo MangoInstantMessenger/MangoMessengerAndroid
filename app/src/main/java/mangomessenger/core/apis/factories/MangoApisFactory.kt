@@ -1,7 +1,9 @@
 package mangomessenger.core.apis.factories
 
 import mangomessenger.core.apis.CommunitiesApi
+import mangomessenger.core.apis.MessagesApi
 import mangomessenger.core.apis.SessionsApi
+import mangomessenger.core.apis.UsersApi
 
 interface MangoApisFactory {
 
