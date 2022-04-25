@@ -34,7 +34,7 @@ class UploadChannelPictureTests {
 
     @Test
     fun uploadChannelPictureSuccess() {
-        val fileUrl = javaClass.classLoader?.getResource("floppa.jpg")
+        val fileUrl = javaClass.classLoader?.getResource("eth.png")
         val chatId = UUID.fromString("c99cc40d-dd1c-42fd-9da7-1157184f9781")
         val picture = File(fileUrl?.file ?: throw NullPointerException("'fileUrl' was null."))
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())

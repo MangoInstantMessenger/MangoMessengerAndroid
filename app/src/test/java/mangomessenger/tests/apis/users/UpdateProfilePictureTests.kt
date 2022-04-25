@@ -30,7 +30,7 @@ class UpdateProfilePictureTests {
 
     @Test
     fun updateProfilePictureSuccess() {
-        val fileUrl = javaClass.classLoader?.getResource("floppa.jpg")
+        val fileUrl = javaClass.classLoader?.getResource("eth.png")
         val file = File(fileUrl?.file ?: throw NullPointerException("'fileUrl' was null."))
         val loginRequest = LoginRequest(
             EnvironmentVariables.testEmail(),
