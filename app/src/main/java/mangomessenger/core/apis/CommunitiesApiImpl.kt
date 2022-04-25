@@ -75,6 +75,7 @@ class CommunitiesApiImpl(
         val httpRequest = HttpRequest(HttpMethods.POST, url).applyMultipartFormContent(multipartForm)
         val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
+            println("uploadResponseCode: ${it.connection.responseCode}")
             return@thenApply gson.fromJson(String(it.data), UpdateChannelPictureResponse::class.java)
         }
     }
