@@ -1,6 +1,8 @@
 package mangomessenger.core.apis
 
 import mangomessenger.core.apis.requests.*
+import mangomessenger.core.apis.responses.DeleteMessageResponse
+import mangomessenger.core.apis.responses.EditMessageResponse
 import mangomessenger.core.apis.responses.GetMessagesResponse
 import mangomessenger.core.apis.responses.SendMessageResponse
 import java.util.concurrent.CompletableFuture
@@ -10,9 +12,9 @@ interface MessagesApi {
 
     fun searchMessages(searchMessagesRequest: SearchMessagesRequest) : CompletableFuture<GetMessagesResponse>
 
-    fun sendMessage(request: SendMessageRequest) : CompletableFuture<SendMessageResponse>
+    fun sendMessage(sendMessageRequest: SendMessageRequest) : CompletableFuture<SendMessageResponse>
 
-    fun editMessage(request: EditMessageRequest) : CompletableFuture<Unit>
+    fun editMessage(editMessageRequest: EditMessageRequest) : CompletableFuture<EditMessageResponse>
 
-    fun deleteMessage(request: DeleteMessageRequest) : CompletableFuture<Unit>
+    fun deleteMessage(deleteMessageRequest: DeleteMessageRequest) : CompletableFuture<DeleteMessageResponse>
 }
