@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - develop
+      - configure-ci
 jobs:
   build:
     runs-on: ubuntu-latest
