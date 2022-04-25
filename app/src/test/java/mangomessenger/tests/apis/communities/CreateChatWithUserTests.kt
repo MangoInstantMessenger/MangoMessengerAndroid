@@ -32,7 +32,7 @@ class CreateChatWithUserTests {
 
     @Test
     fun createChatWithUserSuccess() {
-        val userId = UUID.fromString("30082298-e6e6-4aca-a8b9-89ba06d12e4f")
+        val userId = UUID.fromString("e77cf2cb-3f3a-4f0b-ac5a-90a3263d075a")
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
         val responseTask = signInService
             .signIn(loginRequest)
