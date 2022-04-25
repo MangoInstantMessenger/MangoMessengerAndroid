@@ -51,10 +51,6 @@ class ChangePasswordTests {
                 rollbackPassword()
                 return@thenApply changePasswordResponse
             }
-            .thenApply { changePasswordResponse ->
-                signInService.signOut()
-                return@thenApply changePasswordResponse
-            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }

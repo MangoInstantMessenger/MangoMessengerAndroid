@@ -57,10 +57,6 @@ class SearchMessagesTests {
             .thenCompose {
                 messagesApi.searchMessages(searchMessagesRequest)
             }
-            .thenApply { searchMessagesResponse ->
-                signInService.signOut()
-                return@thenApply searchMessagesResponse
-            }
         return responseTask
     }
 }

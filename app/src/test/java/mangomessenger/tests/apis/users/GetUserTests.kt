@@ -38,10 +38,6 @@ class GetUserTests {
             .thenCompose {
                 usersApi.getUser(userId)
             }
-            .thenApply { userResponse ->
-                signInService.signOut()
-                return@thenApply userResponse
-            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }
@@ -54,10 +50,6 @@ class GetUserTests {
             .signIn(loginRequest)
             .thenCompose {
                 usersApi.getUser(userId)
-            }
-            .thenApply { userResponse ->
-                signInService.signOut()
-                return@thenApply userResponse
             }
         val response = responseTask.get()
         MangoAsserts.assertFailedResponse(response)

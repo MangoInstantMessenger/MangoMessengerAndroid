@@ -44,10 +44,6 @@ class UpdateSocialsTests {
             .thenCompose {
                 usersApi.updateSocials(updateSocialsRequest)
             }
-            .thenApply { updateAccountResponse ->
-                signInService.signOut()
-                return@thenApply updateAccountResponse
-            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }

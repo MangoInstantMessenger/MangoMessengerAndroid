@@ -40,10 +40,6 @@ class GetMessagesTests {
             .thenCompose {
                 messagesApi.getMessages(getMessagesRequest)
             }
-            .thenApply { getMessagesResponse ->
-                signInService.signOut()
-                return@thenApply getMessagesResponse
-            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }
@@ -57,10 +53,6 @@ class GetMessagesTests {
             .signIn(loginRequest)
             .thenCompose {
                 messagesApi.getMessages(getMessagesRequest)
-            }
-            .thenApply { getMessagesResponse ->
-                signInService.signOut()
-                return@thenApply getMessagesResponse
             }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
