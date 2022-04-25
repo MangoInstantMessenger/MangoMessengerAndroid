@@ -16,7 +16,6 @@ class AuthInterceptor(
         return interceptNext(httpRequest).thenCompose { httpResponse ->
             if (httpResponse.connection.responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 val tokens = tokenStorage.getTokens()
-                println("invoke from AuthInterceptor; currentAccessToken: ${tokens.accessToken}")
                 val interceptAgain = sessionsApi
                     .refreshSessionAsync(tokens.refreshToken)
                     .thenCompose {
