@@ -38,10 +38,11 @@ class UpdateProfilePictureTests {
         val responseTask = signInService
             .signIn(loginRequest)
             .thenCompose {
+                println(it)
                 usersApi.updateProfilePicture(file)
             }
         val response = responseTask.get()
-        println(response.errorMessage)
+        println(response.statusCode)
         MangoAsserts.assertSuccessResponse(response)
     }
 }
