@@ -42,6 +42,7 @@ class UploadChannelPictureTests {
             .signIn(loginRequest)
             .thenCompose { communitiesApi.uploadChannelPictureAsync(chatId, picture) }
         val response = responseTask.get()
+        println(response.errorMessage)
         MangoAsserts.assertSuccessResponse(response)
     }
 }

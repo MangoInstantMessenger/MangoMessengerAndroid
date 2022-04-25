@@ -42,6 +42,7 @@ class EditMessageTests {
             chatId)
         val responseTask = editMessage(editMessageRequest)
         val response = responseTask.get()
+        println(response.errorMessage)
         MangoAsserts.assertSuccessResponse(response)
     }
 

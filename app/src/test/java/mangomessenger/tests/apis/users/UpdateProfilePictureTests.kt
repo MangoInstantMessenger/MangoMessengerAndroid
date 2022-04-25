@@ -41,6 +41,7 @@ class UpdateProfilePictureTests {
                 usersApi.updateProfilePicture(file)
             }
         val response = responseTask.get()
+        println(response.errorMessage)
         MangoAsserts.assertSuccessResponse(response)
     }
 }
