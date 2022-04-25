@@ -63,11 +63,6 @@ class CommunitiesApiImpl(
         chatId: UUID,
         picture: File
     ): CompletableFuture<UpdateChannelPictureResponse> {
-        println("picturePath: ${picture.absolutePath}")
-        println("length: ${picture.length()}")
-        println("extensions: ${picture.extension}")
-        println("isFile: ${picture.isFile}")
-        println("name: ${picture.name}")
         val multipartForm = MultipartFormContent().apply {
             formFields.add(MultipartFormFile(
                 name = "newGroupPicture",
@@ -80,8 +75,6 @@ class CommunitiesApiImpl(
         val httpRequest = HttpRequest(HttpMethods.POST, url).applyMultipartFormContent(multipartForm)
         val response = httpPipeline.handleRequest(httpRequest)
         return response.thenApply {
-            println("uploadResponseCode: ${it.connection.responseCode}")
-            println("data: ${String(it.data)}")
             return@thenApply gson.fromJson(String(it.data), UpdateChannelPictureResponse::class.java)
         }
     }
