@@ -17,10 +17,10 @@ class MultipartFormFile(
     override fun writeToStream(outputStream: OutputStream) {
         outputStream.writer().run {
             write("Content-Disposition: form-data; name=\"$name\"; filename=\"$fileName\"")
-            write(System.lineSeparator())
+            write("\r\n")
             write("Content-Type: $contentType")
-            write(System.lineSeparator())
-            write(System.lineSeparator())
+            write("\r\n")
+            write("\r\n")
             flush()
         }
 

@@ -11,7 +11,7 @@ class MultipartFormContent(val boundary: String = UUID.randomUUID().toString()) 
         formFields.forEach {
             outputStream.writer().run {
                 write("--$boundary")
-                write(System.lineSeparator())
+                write("\r\n")
                 flush()
             }
 
@@ -19,7 +19,7 @@ class MultipartFormContent(val boundary: String = UUID.randomUUID().toString()) 
         }
 
         outputStream.writer().run {
-            write(System.lineSeparator())
+            write("\r\n")
             write("--$boundary--")
             flush()
         }
