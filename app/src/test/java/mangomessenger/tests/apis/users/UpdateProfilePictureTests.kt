@@ -6,7 +6,6 @@ import mangomessenger.bisunesslogic.services.SignInService
 import mangomessenger.bisunesslogic.services.SignInServiceImpl
 import mangomessenger.core.apis.UsersApi
 import mangomessenger.core.apis.requests.LoginRequest
-import mangomessenger.core.apis.requests.UpdateSocialsRequest
 import mangomessenger.tests.apis.asserts.MangoAsserts
 import mangomessenger.tests.infrastructure.HttpPipelineFactoryImpl
 import mangomessenger.tests.infrastructure.MangoApisFactoryImpl
@@ -31,7 +30,8 @@ class UpdateProfilePictureTests {
 
     @Test
     fun updateProfilePictureSuccess() {
-        val file = File(EnvironmentVariables.testImageFilePath())
+        val fileUrl = javaClass.classLoader?.getResource("floppa.jpg")
+        val file = File(fileUrl?.file ?: throw NullPointerException("'fileUrl' was null."))
         val loginRequest = LoginRequest(
             EnvironmentVariables.testEmail(),
             EnvironmentVariables.testPassword())
