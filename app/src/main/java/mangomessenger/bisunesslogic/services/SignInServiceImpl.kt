@@ -35,4 +35,9 @@ class SignInServiceImpl(
             return@thenApply it
         }
     }
+
+    override fun isSigned(): CompletableFuture<LoginResponse> {
+        val refreshToken = tokenStorage.getTokens().refreshToken
+        return sessionsApi.refreshSessionAsync(refreshToken)
+    }
 }

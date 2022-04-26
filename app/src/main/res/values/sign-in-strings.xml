@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loginTitle">Login</string>
+
+    <string name="signIn">Sign In</string>
+    <string name="registry">Registry</string>
+    <string name="restorePassword">Restore Password</string>
+    <string name="afterRegistryTitle">Account Created</string>
+    <string name="restorePasswordDescription">App currently in dev mode. So, phone code sent to the email.</string>
+    <string name="requestRestorePassword">Request restore password</string>
+
+    <string name="createNewAccountPrompt">Create account?</string>
+    <string name="forgotPasswordPrompt">Forgot Password?</string>
+    <string name="backToLoginPrompt">Back to Login</string>
+
+    <string name="email">Email</string>
+    <string name="emailErrorFormat">Email format is invalid.</string>
+
+    <string name="password">Password</string>
+    <string name="passwordErrorEmpty">Password is empty.</string>
+    <string name="passwordErrorRequirements">Password (8 chars, digits, upper, lower, symbol)</string>
+
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="confirmPasswordError">Passwords not equal.</string>
+
+    <string name="displayName">Display Name</string>
+    <string name="displayNameErrorEmpty">Display Name is empty.</string>
+</resources>
