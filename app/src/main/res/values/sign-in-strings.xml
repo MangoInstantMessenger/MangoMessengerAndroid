@@ -5,6 +5,7 @@
     <string name="signIn">Sign In</string>
     <string name="registry">Registry</string>
     <string name="restorePassword">Restore Password</string>
+    <string name="afterRegistryTitle">Account Created</string>
     <string name="restorePasswordDescription">App currently in dev mode. So, phone code sent to the email.</string>
     <string name="requestRestorePassword">Request restore password</string>
 

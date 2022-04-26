@@ -150,9 +150,9 @@ class RegistryViewModel : ViewModel() {
     }
 
     private fun validatePassword(password: String) {
-        val strongPasswordLiteral = "(?=^.{8,}\$)(?=.*\\d)(?=.*[!@#\$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*\$"
-        val pattern = Regex.fromLiteral(strongPasswordLiteral)
-        if (pattern.matches(password).not()) {
+        val pattern = "(?=^.{8,}\$)(?=.*\\d)(?=.*[!@#\$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*\$"
+        val regex = pattern.toRegex()
+        if (regex.matches(password).not()) {
             _registryFormState.value = _registryFormState.value?.copy(
                 passwordError = R.string.passwordErrorRequirements
             )
