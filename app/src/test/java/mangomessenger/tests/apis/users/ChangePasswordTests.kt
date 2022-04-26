@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture
 import kotlin.math.sign
 
 class ChangePasswordTests {
-    private lateinit var tokenStorage: TokenStorage
+    /*private lateinit var tokenStorage: TokenStorage
     private lateinit var usersApi: UsersApi
     private lateinit var signInService: SignInService
 
@@ -62,5 +62,5 @@ class ChangePasswordTests {
             EnvironmentVariables.testPassword()
         )
         return usersApi.changePassword(changePasswordRequest)
-    }
+    }*/
 }
