@@ -47,6 +47,6 @@ class UploadChannelPictureTests {
                 signInService.signOut().thenApply { uploadChannelPictureResponse }
             }
         val response = responseTask.get()
-        MangoAsserts.assertSuccessResponse(response)
+        MangoAsserts.assertImageUploadedSuccess(response)
     }
 }

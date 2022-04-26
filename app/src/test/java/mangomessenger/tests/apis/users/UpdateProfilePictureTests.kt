@@ -44,6 +44,6 @@ class UpdateProfilePictureTests {
                 signInService.signOut().thenApply { updateProfilePictureResponse }
             }
         val response = responseTask.get()
-        MangoAsserts.assertSuccessResponse(response)
+        MangoAsserts.assertImageUploadedSuccess(response)
     }
 }
