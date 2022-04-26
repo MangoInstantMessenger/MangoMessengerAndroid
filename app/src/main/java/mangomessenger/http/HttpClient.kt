@@ -27,6 +27,8 @@ class HttpClient {
 
             connection.connect()
             val data = connection.responseStream()?.readBytes() ?: ByteArray(0)
+            println("url: ${httpRequest.url}")
+            println("response: ${String(data)}")
             return HttpResponse(connection, data)
         }
         finally {
