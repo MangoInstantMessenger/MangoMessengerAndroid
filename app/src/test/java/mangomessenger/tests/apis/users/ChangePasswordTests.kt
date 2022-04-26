@@ -15,10 +15,9 @@ import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
 import org.junit.Before
 import org.junit.Test
 import java.util.concurrent.CompletableFuture
-import kotlin.math.sign
 
 class ChangePasswordTests {
-    /*private lateinit var tokenStorage: TokenStorage
+    private lateinit var tokenStorage: TokenStorage
     private lateinit var usersApi: UsersApi
     private lateinit var signInService: SignInService
 
@@ -48,7 +47,7 @@ class ChangePasswordTests {
                 usersApi.changePassword(changePasswordRequest)
             }
             .thenApply { changePasswordResponse ->
-                rollbackPassword()
+                rollbackPassword().get()
                 return@thenApply changePasswordResponse
             }
         val response = responseTask.get()
@@ -62,5 +61,5 @@ class ChangePasswordTests {
             EnvironmentVariables.testPassword()
         )
         return usersApi.changePassword(changePasswordRequest)
-    }*/
+    }
 }
