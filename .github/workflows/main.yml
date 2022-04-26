@@ -23,7 +23,7 @@ jobs:
       - name: Set Permisions to Gradlew file
         run: 'chmod +x ./gradlew'
       - name: Build with Gradle
-        run: './gradlew build --info'
+        run: './gradlew build'
         env:
           MANGO_DOMAIN: ${{ secrets.MANGO_DOMAIN }}
           TESTS_MANGO_EMAIL: ${{ secrets.TESTS_MANGO_EMAIL }}
