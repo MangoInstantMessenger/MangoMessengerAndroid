@@ -46,9 +46,10 @@ class ChangePasswordTests {
             .thenCompose {
                 usersApi.changePassword(changePasswordRequest)
             }
-            .thenApply { changePasswordResponse ->
-                rollbackPassword().get()
-                return@thenApply changePasswordResponse
+            .thenCompose { changePasswordResponse ->
+                rollbackPassword()
+                    .thenCompose { signInService.signOut() }
+                    .thenApply { changePasswordResponse }
             }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)

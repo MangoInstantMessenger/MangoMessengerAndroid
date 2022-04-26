@@ -33,6 +33,9 @@ class GetChatsTests {
         val getChatsTask = signInService
             .signIn(loginRequest)
             .thenCompose { communitiesApi.getChatsAsync() }
+            .thenCompose { getChatsResponse ->
+                signInService.signOut().thenApply { getChatsResponse }
+            }
         val response = getChatsTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }

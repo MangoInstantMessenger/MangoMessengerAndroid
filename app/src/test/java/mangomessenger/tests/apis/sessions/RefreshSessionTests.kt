@@ -24,10 +24,12 @@ class RefreshSessionTests {
     @Test
     fun refreshSessionSuccess() {
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
-        val responseTask = sessionsApi.loginAsync(loginRequest).thenCompose {
-            val refreshToken = it.tokens?.refreshToken ?: UuidUtils.emptyUUID()
-            return@thenCompose sessionsApi.refreshSessionAsync(refreshToken)
-        }
+        val responseTask = sessionsApi
+            .loginAsync(loginRequest)
+            .thenCompose {
+                val refreshToken = it.tokens?.refreshToken ?: UuidUtils.emptyUUID()
+                return@thenCompose sessionsApi.refreshSessionAsync(refreshToken)
+            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }

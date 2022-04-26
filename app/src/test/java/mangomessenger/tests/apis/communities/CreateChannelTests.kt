@@ -39,6 +39,9 @@ class CreateChannelTests {
         val responseTask = signInService
             .signIn(loginRequest)
             .thenCompose { communitiesApi.createChannelAsync(createCommunityRequest) }
+            .thenCompose { createChannelResponse ->
+                signInService.signOut().thenApply { createChannelResponse }
+            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }

@@ -40,6 +40,9 @@ class UpdateProfilePictureTests {
             .thenCompose {
                 usersApi.updateProfilePicture(file)
             }
+            .thenCompose { updateProfilePictureResponse ->
+                signInService.signOut().thenApply { updateProfilePictureResponse }
+            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }

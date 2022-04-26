@@ -61,5 +61,8 @@ class SendMessageTests {
             .thenCompose {
                 messagesApi.sendMessage(sendMessageRequest)
             }
+            .thenCompose { sendMessageResponse ->
+                signInService.signOut().thenApply { sendMessageResponse }
+            }
     }
 }
