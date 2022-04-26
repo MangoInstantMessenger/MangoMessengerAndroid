@@ -18,7 +18,7 @@ class HttpPipelineFactoryImpl(private val tokenStorage: TokenStorage) : HttpPipe
         val httpHandler = HttpHandler(httpClient)
         val httpPipeline = HttpPipeline(httpHandler)
         val defaultPipeline = HttpPipelineFactoryDefault().createHttpPipeline()
-        val sessionsApi = SessionsApiImpl(EnvironmentVariables.mangoDomain(), defaultPipeline)
+        val sessionsApi = SessionsApiImpl("https://back.mangomessenger.company", defaultPipeline)
         httpPipeline.addInterceptor(AuthInterceptor(tokenStorage, sessionsApi))
         httpPipeline.addInterceptor(JwtInterceptor(tokenStorage))
         httpPipeline.addInterceptor(SafetyUnauthenticatedInterceptor())

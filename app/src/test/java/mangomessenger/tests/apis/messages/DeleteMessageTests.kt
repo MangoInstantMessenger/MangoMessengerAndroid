@@ -46,6 +46,9 @@ class DeleteMessageTests {
                 )
                 messagesApi.deleteMessage(deleteMessageRequest)
             }
+            .thenCompose { deleteMessageResponse ->
+                signInService.signOut().thenApply { deleteMessageResponse }
+            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }
@@ -62,6 +65,9 @@ class DeleteMessageTests {
                     chatId
                 )
                 messagesApi.deleteMessage(deleteMessageRequest)
+            }
+            .thenCompose { deleteMessageResponse ->
+                signInService.signOut().thenApply { deleteMessageResponse }
             }
         val response = responseTask.get()
         MangoAsserts.assertFailedResponse(response)

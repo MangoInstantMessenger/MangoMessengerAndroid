@@ -37,6 +37,9 @@ class CreateChatWithUserTests {
         val responseTask = signInService
             .signIn(loginRequest)
             .thenCompose { communitiesApi.createChatWithUserAsync(userId) }
+            .thenCompose { createChatResponse ->
+                signInService.signOut().thenApply { createChatResponse }
+            }
         val response = responseTask.get()
         MangoAsserts.assertSuccessResponse(response)
     }
@@ -56,6 +59,9 @@ class CreateChatWithUserTests {
         val responseTask = signInService
             .signIn(loginRequest)
             .thenCompose { communitiesApi.createChatWithUserAsync(userId) }
+            .thenCompose { createChatResponse ->
+                signInService.signOut().thenApply { createChatResponse }
+            }
         val response = responseTask.get()
         MangoAsserts.assertFailedResponse(response)
     }

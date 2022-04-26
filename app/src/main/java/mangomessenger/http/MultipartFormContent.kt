@@ -7,11 +7,15 @@ import kotlin.collections.ArrayList
 class MultipartFormContent(val boundary: String = UUID.randomUUID().toString()) : HttpContent {
     val formFields = ArrayList<MultipartFormVariable>()
 
+    private companion object {
+        const val lineSeparator = "\r\n"
+    }
+
     override fun writeToStream(outputStream: OutputStream) {
         formFields.forEach {
             outputStream.writer().run {
                 write("--$boundary")
-                write(System.lineSeparator())
+                write(lineSeparator)
                 flush()
             }
 
@@ -19,7 +23,7 @@ class MultipartFormContent(val boundary: String = UUID.randomUUID().toString()) 
         }
 
         outputStream.writer().run {
-            write(System.lineSeparator())
+            write(lineSeparator)
             write("--$boundary--")
             flush()
         }

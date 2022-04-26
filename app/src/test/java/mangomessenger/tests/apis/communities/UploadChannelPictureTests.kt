@@ -13,6 +13,8 @@ import mangomessenger.tests.infrastructure.constants.EnvironmentVariables
 import org.junit.Before
 import org.junit.Test
 import java.io.File
+import java.lang.NullPointerException
+import java.lang.RuntimeException
 import java.util.*
 
 class UploadChannelPictureTests {
@@ -32,13 +34,19 @@ class UploadChannelPictureTests {
 
     @Test
     fun uploadChannelPictureSuccess() {
+        val fileUrl = javaClass.classLoader?.getResource("eth.png")
         val chatId = UUID.fromString("c99cc40d-dd1c-42fd-9da7-1157184f9781")
-        val picture = File(EnvironmentVariables.testImageFilePath())
+        val picture = File(fileUrl?.file ?: throw NullPointerException("'fileUrl' was null."))
         val loginRequest = LoginRequest(EnvironmentVariables.testEmail(), EnvironmentVariables.testPassword())
         val responseTask = signInService
             .signIn(loginRequest)
-            .thenCompose { communitiesApi.uploadChannelPictureAsync(chatId, picture) }
+            .thenCompose {
+                communitiesApi.uploadChannelPictureAsync(chatId, picture)
+            }
+            .thenCompose { uploadChannelPictureResponse ->
+                signInService.signOut().thenApply { uploadChannelPictureResponse }
+            }
         val response = responseTask.get()
-        MangoAsserts.assertSuccessResponse(response)
+        MangoAsserts.assertImageUploadedSuccess(response)
     }
 }

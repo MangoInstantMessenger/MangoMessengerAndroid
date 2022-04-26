@@ -65,5 +65,8 @@ class EditMessageTests {
             .thenCompose {
                 messagesApi.editMessage(editMessageRequest)
             }
+            .thenCompose { deleteMessageResponse ->
+                signInService.signOut().thenApply { deleteMessageResponse }
+            }
     }
 }

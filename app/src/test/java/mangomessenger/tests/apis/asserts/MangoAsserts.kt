@@ -22,5 +22,14 @@ class MangoAsserts {
         fun assertUnauthorized(response: BaseResponse) {
             Assert.assertEquals(HttpURLConnection.HTTP_UNAUTHORIZED, response.statusCode)
         }
+
+        fun assertImageUploadedSuccess(response: BaseResponse) {
+            if (response.statusCode == 409) {
+                Assert.assertEquals(response.errorMessage, "UPLOADED_DOCUMENTS_LIMIT_REACHED")
+            }
+            else {
+                assertSuccessResponse(response)
+            }
+        }
     }
 }

@@ -12,15 +12,16 @@ class MultipartFormFile(
 
     private companion object {
         const val bufferSize = 1024 * 4
+        const val lineSeparator = "\r\n"
     }
 
     override fun writeToStream(outputStream: OutputStream) {
         outputStream.writer().run {
             write("Content-Disposition: form-data; name=\"$name\"; filename=\"$fileName\"")
-            write(System.lineSeparator())
+            write(lineSeparator)
             write("Content-Type: $contentType")
-            write(System.lineSeparator())
-            write(System.lineSeparator())
+            write(lineSeparator)
+            write(lineSeparator)
             flush()
         }
 

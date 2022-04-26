@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - develop
+      - configure-ci
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +23,13 @@ jobs:
       - name: Set Permisions to Gradlew file
         run: 'chmod +x ./gradlew'
       - name: Build with Gradle
-        run: './gradlew build --info --debug'
+        run: './gradlew build'
+        env:
+          MANGO_DOMAIN: ${{ secrets.MANGO_DOMAIN }}
+          TESTS_MANGO_EMAIL: ${{ secrets.TESTS_MANGO_EMAIL }}
+          TESTS_MANGO_PASSWORD: ${{ secrets.TESTS_MANGO_PASSWORD }}
+          TEST_MANGO_NEW_PASSWORD: ${{ secrets.TEST_MANGO_NEW_PASSWORD }}
+          TESTS_MANGO_IMAGE: ${{ secrets.TESTS_MANGO_IMAGE }}
       
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v3.0.0
