@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MangoMessenger</string>
+    <string name="main_menu_account">Account</string>
+    <string name="main_menu_contacts">Contacts</string>
+    <string name="main_menu_chats">Chats</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

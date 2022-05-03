@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mangomessenger.R
 import com.example.mangomessenger.ui.registry.RegistryActivity
 import com.example.mangomessenger.ui.restore.RestoreActivity
-import mangomessenger.bisunesslogic.data.TokenStorageImpl
+import mangomessenger.bisunesslogic.data.TokenStorageProvider
 import mangomessenger.bisunesslogic.services.HttpPipelineFactoryImpl
 import mangomessenger.bisunesslogic.services.MangoApisFactoryImpl
 import mangomessenger.bisunesslogic.services.SignInServiceImpl
@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var forgotPasswordPrompt: TextView
 
     init {
-        val tokenStorage = TokenStorageImpl()
+        val tokenStorage = TokenStorageProvider.getTokenStorage()
         val pipelineFactory = HttpPipelineFactoryImpl(tokenStorage)
         val mangoApisFactory = MangoApisFactoryImpl(pipelineFactory)
         val sessionsApi = mangoApisFactory.createSessionsApi()

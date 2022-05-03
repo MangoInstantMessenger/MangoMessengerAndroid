@@ -15,7 +15,7 @@ class AfterRegistryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.after_registry_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_after_registry, container, false)
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
             val activity = Intent(requireContext(), LoginActivity::class.java)
             startActivity(activity)

@@ -41,7 +41,7 @@ class RegistryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.registry_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_registry, container, false)
         initUiComponents(view)
         addListeners()
         registryViewModel.registryFormState.observe(this.viewLifecycleOwner) {

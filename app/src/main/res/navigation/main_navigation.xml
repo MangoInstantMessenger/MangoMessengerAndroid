@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/nav_chats">
+
+    <fragment
+        android:id="@+id/nav_chats"
+        android:name="com.example.mangomessenger.ui.chats.ChatsFragment"
+        android:label="Chats"
+        tools:layout="@layout/fragment_chats"/>
+
+    <fragment
+        android:id="@+id/nav_contacts"
+        android:name="com.example.mangomessenger.ui.contacts.ContactsFragment"
+        android:label="Contacts"
+        tools:layout="@layout/fragment_contacts"/>
+
+</navigation>
