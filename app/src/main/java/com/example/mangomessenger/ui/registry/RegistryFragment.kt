@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.mangomessenger.R
+import com.example.mangomessenger.databinding.FragmentRegistryBinding
 import com.example.mangomessenger.ui.login.LoginActivity
 import com.example.mangomessenger.ui.restore.RestoreActivity
 
@@ -20,31 +18,22 @@ class RegistryFragment : Fragment() {
     }
 
     private lateinit var registryViewModel: RegistryViewModel
-    private lateinit var displayNameInput: EditText
-    private lateinit var displayNamePrompt: TextView
-
-    private lateinit var emailInput: EditText
-    private lateinit var emailPrompt: TextView
-
-    private lateinit var passwordInput: EditText
-    private lateinit var passwordPrompt: TextView
-
-    private lateinit var confirmPasswordInput: EditText
-    private lateinit var confirmPasswordPrompt: TextView
-
-    private lateinit var registryButton: Button
-    private lateinit var loginPrompt: TextView
-    private lateinit var forgotPasswordPrompt: TextView
-
+    private lateinit var binding: FragmentRegistryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_registry, container, false)
-        initUiComponents(view)
+        binding = FragmentRegistryBinding.inflate(layoutInflater)
         addListeners()
+
         registryViewModel.registryFormState.observe(this.viewLifecycleOwner) {
+            val displayNamePrompt = binding.displayNamePrompt
+            val emailPrompt = binding.emailPrompt
+            val passwordPrompt = binding.passwordPrompt
+            val confirmPasswordPrompt = binding.confirmPasswordPrompt
+
             if (it.displayNameError != null && it.displayNameTouched) {
                 displayNamePrompt.text = getString(it.displayNameError)
                 displayNamePrompt.visibility = View.VISIBLE
@@ -77,7 +66,7 @@ class RegistryFragment : Fragment() {
                 confirmPasswordPrompt.visibility = View.GONE
             }
 
-            registryButton.isEnabled = it.dataIsValid
+            binding.registryButton.isEnabled = it.dataIsValid
         }
         return view
     }
@@ -92,26 +81,12 @@ class RegistryFragment : Fragment() {
         removeListeners()
     }
 
-    private fun initUiComponents(view: View) {
-        displayNameInput = view.findViewById(R.id.displayNameInput)
-        displayNamePrompt = view.findViewById(R.id.displayNamePrompt)
-        emailInput = view.findViewById(R.id.emailInput)
-        emailPrompt = view.findViewById(R.id.emailPrompt)
-        passwordInput = view.findViewById(R.id.passwordInput)
-        passwordPrompt = view.findViewById(R.id.passwordPrompt)
-        confirmPasswordInput = view.findViewById(R.id.confirmPasswordInput)
-        confirmPasswordPrompt = view.findViewById(R.id.confirmPasswordPrompt)
-        registryButton = view.findViewById(R.id.registryButton)
-        loginPrompt = view.findViewById(R.id.backToLoginPrompt)
-        forgotPasswordPrompt = view.findViewById(R.id.forgotPasswordPrompt)
-    }
-
     private fun addListeners() {
-        displayNameInput.addTextChangedListener(registryViewModel.displayNameWatcher)
-        emailInput.addTextChangedListener(registryViewModel.emailWatcher)
-        passwordInput.addTextChangedListener(registryViewModel.passwordWatcher)
-        confirmPasswordInput.addTextChangedListener(registryViewModel.confirmPasswordWatcher)
-        registryButton.setOnClickListener {
+        binding.displayNameInput.addTextChangedListener(registryViewModel.displayNameWatcher)
+        binding.emailInput.addTextChangedListener(registryViewModel.emailWatcher)
+        binding.passwordInput.addTextChangedListener(registryViewModel.passwordWatcher)
+        binding.confirmPasswordInput.addTextChangedListener(registryViewModel.confirmPasswordWatcher)
+        binding.registryButton.setOnClickListener {
             if (this.isAdded) {
                 val afterRegistryFragment = AfterRegistryFragment.newInstance()
                 val transaction = parentFragmentManager.beginTransaction();
@@ -120,18 +95,18 @@ class RegistryFragment : Fragment() {
                 transaction.commit()
             }
         }
-        loginPrompt.setOnClickListener(this::navigateToLogin)
-        forgotPasswordPrompt.setOnClickListener(this::navigateToRestore)
+        binding.backToLoginPrompt.setOnClickListener(this::navigateToLogin)
+        binding.forgotPasswordPrompt.setOnClickListener(this::navigateToRestore)
     }
 
     private fun removeListeners() {
-        displayNameInput.removeTextChangedListener(registryViewModel.displayNameWatcher)
-        emailInput.removeTextChangedListener(registryViewModel.emailWatcher)
-        passwordInput.removeTextChangedListener(registryViewModel.passwordWatcher)
-        confirmPasswordInput.removeTextChangedListener(registryViewModel.confirmPasswordWatcher)
-        registryButton.setOnClickListener(null)
-        loginPrompt.setOnClickListener(null)
-        forgotPasswordPrompt.setOnClickListener(null)
+        binding.displayNameInput.removeTextChangedListener(registryViewModel.displayNameWatcher)
+        binding.emailInput.removeTextChangedListener(registryViewModel.emailWatcher)
+        binding.passwordInput.removeTextChangedListener(registryViewModel.passwordWatcher)
+        binding.confirmPasswordInput.removeTextChangedListener(registryViewModel.confirmPasswordWatcher)
+        binding.registryButton.setOnClickListener(null)
+        binding.backToLoginPrompt.setOnClickListener(null)
+        binding.forgotPasswordPrompt.setOnClickListener(null)
     }
 
     private fun navigateToLogin(view: View) {

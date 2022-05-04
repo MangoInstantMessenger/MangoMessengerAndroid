@@ -1,24 +1,16 @@
 package com.example.mangomessenger.ui.restore
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import com.example.mangomessenger.R
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mangomessenger.databinding.ActivityRestoreBinding
 import com.example.mangomessenger.ui.login.LoginActivity
 import com.example.mangomessenger.ui.registry.RegistryActivity
 
 class RestoreActivity : AppCompatActivity() {
     private val restoreViewModel: RestoreViewModel
-
-    private lateinit var emailInput: EditText
-    private lateinit var emailPrompt: TextView
-    private lateinit var requestRestorePasswordButton: Button
-    private lateinit var backToLoginPrompt: TextView
-    private lateinit var createAccountPrompt: TextView
+    private lateinit var binding: ActivityRestoreBinding
 
     init {
         val restoreViewModelFactory = RestoreViewModelFactory()
@@ -27,13 +19,14 @@ class RestoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_restore)
+        binding = ActivityRestoreBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
-        initUiComponents()
         addListeners()
 
         restoreViewModel.restoreFormState.observe(this) {
-            requestRestorePasswordButton.isEnabled = it.dataIsValid
+            val emailPrompt = binding.emailPrompt
+            binding.requestRestorePasswordButton.isEnabled = it.dataIsValid
 
             if (it.emailError != null && it.emailTouched) {
                 emailPrompt.text = getString(it.emailError)
@@ -50,26 +43,18 @@ class RestoreActivity : AppCompatActivity() {
         removeListeners()
     }
 
-    private fun initUiComponents() {
-        emailInput = findViewById(R.id.emailInput)
-        emailPrompt = findViewById(R.id.emailPrompt)
-        requestRestorePasswordButton = findViewById(R.id.requestRestorePasswordButton)
-        backToLoginPrompt = findViewById(R.id.backToLoginPrompt)
-        createAccountPrompt = findViewById(R.id.createAccountPrompt)
-    }
-
     private fun addListeners() {
-        emailInput.addTextChangedListener(restoreViewModel.emailWatcher)
-        requestRestorePasswordButton.setOnClickListener { restoreViewModel.sendRestoreRequest() }
-        backToLoginPrompt.setOnClickListener(this::navigateToLogin)
-        createAccountPrompt.setOnClickListener(this::navigateToRegistry)
+        binding.emailInput.addTextChangedListener(restoreViewModel.emailWatcher)
+        binding.requestRestorePasswordButton.setOnClickListener { restoreViewModel.sendRestoreRequest() }
+        binding.backToLoginPrompt.setOnClickListener(this::navigateToLogin)
+        binding.createAccountPrompt.setOnClickListener(this::navigateToRegistry)
     }
 
     private fun removeListeners() {
-        emailInput.removeTextChangedListener(restoreViewModel.emailWatcher)
-        requestRestorePasswordButton.setOnClickListener(null)
-        backToLoginPrompt.setOnClickListener(null)
-        createAccountPrompt.setOnClickListener(null)
+        binding.emailInput.removeTextChangedListener(restoreViewModel.emailWatcher)
+        binding.requestRestorePasswordButton.setOnClickListener(null)
+        binding.backToLoginPrompt.setOnClickListener(null)
+        binding.createAccountPrompt.setOnClickListener(null)
     }
 
     private fun navigateToLogin(view: View) {

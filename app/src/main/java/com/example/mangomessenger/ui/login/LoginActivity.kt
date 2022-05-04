@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mangomessenger.R
+import com.example.mangomessenger.databinding.ActivityLoginBinding
 import com.example.mangomessenger.ui.registry.RegistryActivity
 import com.example.mangomessenger.ui.restore.RestoreActivity
 import mangomessenger.bisunesslogic.data.TokenStorageProvider
@@ -18,16 +19,7 @@ import mangomessenger.bisunesslogic.services.SignInServiceImpl
 
 class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel
-
-    private lateinit var emailInput: EditText
-    private lateinit var emailPrompt: TextView
-
-    private lateinit var passwordInput: EditText
-    private lateinit var passwordPrompt: TextView
-
-    private lateinit var loginButton: Button
-    private lateinit var createAccountPrompt: TextView
-    private lateinit var forgotPasswordPrompt: TextView
+    private lateinit var binding: ActivityLoginBinding
 
     init {
         val tokenStorage = TokenStorageProvider.getTokenStorage()
@@ -41,12 +33,15 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
-        initUiComponents()
         addListeners()
 
         loginViewModel.loginFormState.observe(this) {
+            val emailPrompt = binding.emailPrompt
+            val passwordPrompt = binding.passwordPrompt
+
             if (it.emailError != null && it.emailTouched) {
                 emailPrompt.text = getString(it.emailError)
                 emailPrompt.visibility = View.VISIBLE
@@ -63,14 +58,14 @@ class LoginActivity : AppCompatActivity() {
                 passwordPrompt.visibility = View.GONE
             }
 
-            loginButton.isEnabled = it.dataIsValid
+            binding.signInButton.isEnabled = it.dataIsValid
         }
 
         loginViewModel.loginResultState.observe(this) {
             val isEnabled = it.inProgress.not()
-            emailInput.isEnabled = isEnabled
-            passwordInput.isEnabled = isEnabled
-            loginButton.isEnabled = isEnabled
+            binding.emailInput.isEnabled = isEnabled
+            binding.passwordInput.isEnabled = isEnabled
+            binding.signInButton.isEnabled = isEnabled
 
             if (it.loginResponse == null) {
                return@observe
@@ -92,34 +87,24 @@ class LoginActivity : AppCompatActivity() {
         removeListeners()
     }
 
-    private fun initUiComponents() {
-        emailPrompt = findViewById(R.id.emailPrompt)
-        passwordPrompt = findViewById(R.id.passwordPrompt)
-        emailInput = findViewById(R.id.emailInput)
-        passwordInput = findViewById(R.id.passwordInput)
-        loginButton = findViewById(R.id.signInButton)
-        createAccountPrompt = findViewById(R.id.createAccountPrompt)
-        forgotPasswordPrompt = findViewById(R.id.forgotPasswordPrompt)
-    }
-
     private fun addListeners() {
-        emailInput.addTextChangedListener(loginViewModel.emailWatcher)
-        passwordInput.addTextChangedListener(loginViewModel.passwordWatcher)
-        loginButton.setOnClickListener {
-            val email = emailInput.text.toString()
-            val password = passwordInput.text.toString()
+        binding.emailInput.addTextChangedListener(loginViewModel.emailWatcher)
+        binding.passwordInput.addTextChangedListener(loginViewModel.passwordWatcher)
+        binding.signInButton.setOnClickListener {
+            val email = binding.emailInput.text.toString()
+            val password = binding.passwordInput.text.toString()
             loginViewModel.login(email, password)
         }
-        createAccountPrompt.setOnClickListener(this::navigateToRegistry)
-        forgotPasswordPrompt.setOnClickListener(this::navigateToRestore)
+        binding.createAccountPrompt.setOnClickListener(this::navigateToRegistry)
+        binding.forgotPasswordPrompt.setOnClickListener(this::navigateToRestore)
     }
 
     private fun removeListeners() {
-        emailInput.removeTextChangedListener(loginViewModel.emailWatcher)
-        passwordInput.removeTextChangedListener(loginViewModel.passwordWatcher)
-        loginButton.setOnClickListener(null)
-        createAccountPrompt.setOnClickListener(null)
-        forgotPasswordPrompt.setOnClickListener(null)
+        binding.emailInput.removeTextChangedListener(loginViewModel.emailWatcher)
+        binding.passwordInput.removeTextChangedListener(loginViewModel.passwordWatcher)
+        binding.signInButton.setOnClickListener(null)
+        binding.createAccountPrompt.setOnClickListener(null)
+        binding.forgotPasswordPrompt.setOnClickListener(null)
     }
 
     private fun navigateToRegistry(view: View) {
