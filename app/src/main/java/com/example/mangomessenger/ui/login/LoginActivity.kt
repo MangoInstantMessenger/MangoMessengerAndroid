@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mangomessenger.R
 import com.example.mangomessenger.databinding.ActivityLoginBinding
+import com.example.mangomessenger.ui.main.MainActivity
 import com.example.mangomessenger.ui.registry.RegistryActivity
 import com.example.mangomessenger.ui.restore.RestoreActivity
 import mangomessenger.bisunesslogic.data.TokenStorageProvider
@@ -72,8 +73,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (it.loginResponse.success) {
-                val msg = "Success: ${it.loginResponse.message}"
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                val activity = Intent(this, MainActivity::class.java)
+                startActivity(activity)
+                finish()
             }
             else {
                 val msg = "Error: ${it.loginResponse.errorMessage}"
