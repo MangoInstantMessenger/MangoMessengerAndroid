@@ -14,7 +14,8 @@ import com.example.mangomessenger.ui.restore.RestoreActivity
 class RegistryFragment : Fragment() {
 
     private val registryViewModel: RegistryViewModel
-    private lateinit var binding: FragmentRegistryBinding
+    private var _binding: FragmentRegistryBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = RegistryFragment()
@@ -26,10 +27,11 @@ class RegistryFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegistryBinding.inflate(layoutInflater)
+        _binding = FragmentRegistryBinding.inflate(inflater, container, false)
         val view = binding.root
         addListeners()
 
@@ -80,6 +82,7 @@ class RegistryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         removeListeners()
+        _binding = null
     }
 
     private fun addListeners() {
