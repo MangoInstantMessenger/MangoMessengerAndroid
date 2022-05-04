@@ -23,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
             runBlocking {
                 delay(3000)
                 startActivity(loginPage)
+                finish()
             }
         }
     }

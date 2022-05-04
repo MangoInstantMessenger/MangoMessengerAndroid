@@ -3,9 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/drawable/ic_icons8_menu.xml" value="0.1" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/activity_registry.xml" value="0.2" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/activity_restore.xml" value="0.2" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/activity_splash.xml" value="0.10065590312815338" />
         <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/after_registry_fragment.xml" value="0.2234375" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/app_bar_main.xml" value="0.20625" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/content_main.xml" value="0.2234375" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/fragment_chats.xml" value="0.1" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/fragment_contacts.xml" value="0.2234375" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/fragment_registry.xml" value="0.10822401614530777" />
         <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/layout/registry_fragment.xml" value="0.2234375" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/menu/main_menu.xml" value="0.2234375" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Mango/MangoMessengerMobile/app/src/main/res/mipmap-anydpi-v26/mango_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>
