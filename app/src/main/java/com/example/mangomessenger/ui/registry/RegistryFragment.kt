@@ -13,19 +13,24 @@ import com.example.mangomessenger.ui.restore.RestoreActivity
 
 class RegistryFragment : Fragment() {
 
+    private val registryViewModel: RegistryViewModel
+    private lateinit var binding: FragmentRegistryBinding
+
     companion object {
         fun newInstance() = RegistryFragment()
     }
 
-    private lateinit var registryViewModel: RegistryViewModel
-    private lateinit var binding: FragmentRegistryBinding
+    init {
+        val factory = RegistryViewModelFactory()
+        registryViewModel = factory.create(RegistryViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_registry, container, false)
+    ): View {
         binding = FragmentRegistryBinding.inflate(layoutInflater)
+        val view = binding.root
         addListeners()
 
         registryViewModel.registryFormState.observe(this.viewLifecycleOwner) {
@@ -68,12 +73,8 @@ class RegistryFragment : Fragment() {
 
             binding.registryButton.isEnabled = it.dataIsValid
         }
-        return view
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        registryViewModel = RegistryViewModelFactory().create(RegistryViewModel::class.java)
+        return view
     }
 
     override fun onDestroyView() {
